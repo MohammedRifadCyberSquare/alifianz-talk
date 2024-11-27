@@ -1,0 +1,145 @@
+{% load static %}
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Alifianz Talk</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'common/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'common/assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'common/assets/css/templatemo-digimedia-v1.css' %}">
+    <link rel="stylesheet" href="{% static 'common/assets/css/animated.css' %}">
+    <link rel="stylesheet" href="{% static 'common/assets/css/owl.css' %}">
+<!--
+
+TemplateMo 568 DigiMedia
+
+https://templatemo.com/tm-568-digimedia
+
+-->
+  </head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- Pre-header Starts -->
+   
+  <!-- Pre-header End -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+
+
+       
+
+
+
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- Logo -->
+            <a class="navbar-brand logo" href="index.html">
+              <img src="{% static 'common/assets/images/logo-v1.png' %}" alt="">
+            </a>
+          
+            <!-- Toggler for smaller devices -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <!-- Navigation items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                
+                <li class="scroll-to-section px-2 py-2"><div class="border-first-button" ><a href="{% url 'common:admin_login' %}" > Admin Login</a></div></li>
+               
+                 <li class="scroll-to-section  py-2"><div class="border-first-button" ><a href="{% url 'common:judges_login' %}" > Judges Login</a></div></li>
+              </ul>
+            </div>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+   
+
+  <div id="about" class="about section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="about-left-image  wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
+                <img src="{% static 'common/assets/images/about-dec.png' %}" alt="">
+              </div>
+            </div>
+            <div class="col-lg-6 align-self-center  wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+              {% block content%}
+                {% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   
+  
+   
+
+
+   
+  
+   
+
+   
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2022 DigiMedia Co., Ltd. All Rights Reserved. 
+          <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <script src="{% static 'common/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'common/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'common/assets/js/owl-carousel.js' %}"></script>
+  <script src="{% static 'common/assets/js/animation.js' %}"></script>
+  <script src="{% static 'common/assets/js/imagesloaded.js' %}"></script>
+  <script src="{% static 'common/assets/js/custom.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+{% extends 'alif_admin/adminMaster.html' %}
+
+{% block admin_content %}
+<div class="container d-flex justify-content-center " style="min-height: 100vh;">
+    <div class="col-md-6">
+        <div class="card-body">
+            <h3 class="text-center py-3" style="font-weight: bolder;">Register Student</h3>
+             
+            {% if message %}
+           <div class="alert  mt-3"  style="background-color: #EE4266;color: white;" id="error-msg" role="alert">
+            {{ message }}
+          </div>
+          {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-1">
+                    <label for="admission_no" class="form-label text-dark py-2">Admission No</label>
+                    <input type="number"class="form-control" name="admission_no" id="">
+                </div>
+                <div class="mb-1">
+                    <label for="participant_name" class="form-label text-dark py-2">Student Name</label>
+                    <input type="text" required class="form-control" name="participant_name" id="">
+                </div>
+
+                <div class="mb-1">
+                    <label for="category" class="form-label text-dark py-2">Category</label>
+                    <select name="category" required class="form-control" id="">
+                        <option value="Category-1">Category-1</option>
+                        <option value="Category-2">Category-2</option>
+                        <option value="Category-3">Category-3</option>
+                        <option value="Category-4">Category-4</option>
+                        <option value="Category-5">Category-5</option>
+                         
+
+                    </select>
+                </div>
+                <div class="mb-1">
+                    <label for="student_cls" class="form-label text-dark py-2">Class</label>
+                    <select name="student_cls" required class="form-control" id="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="division" class="form-label text-dark py-2">Division</label>
+                    <select name="division" required class="form-control" id="">
+                        <option value="a">A</option>
+                        <option value="b">B</option>
+                        <option value="c">C</option>
+                        <option value="d">D</option>
+                        <option value="e">E</option>
+                        <option value="f">F</option>
+                        <option value="g">G</option>
+                        <option value="h">H</option>
+                        <option value="i">I</option>
+                        <option value="j">J</option>
+                    </select>
+                </div>
+                
+                 
+                <div>
+                <button type="submit" class="btn btn-primary d-flex justify-content-center w-100">Add Now</button>
+
+                </div>
+            </form>
+
+            
+        </div>
+    </div>
+ 
+ 
+
+    <script>
+        setTimeout(function() {
+           var errorMsg = document.getElementById('error-msg');
+           if (errorMsg) {
+              errorMsg.style.display = 'none';
+           }
+        }, 2000); // 5000 milliseconds = 5 seconds
+     </script>
+</div>
+{% endblock %}

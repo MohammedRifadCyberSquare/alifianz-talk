@@ -1,0 +1,166 @@
+{% extends 'alif_admin/adminMaster.html' %}
+
+{% block admin_content %}
+<div class="container d-flex justify-content-center " style="min-height: 100vh;">
+    <div class="col-md-6">
+        <div class="card-body">
+            <h3 class="text-center py-3" style="font-weight: bolder;">Generate Code Letter</h3>
+             
+            {% if message %}
+           <div class="alert  mt-3"  style="background-color: #EE4266;color: white;" id="error-msg" role="alert">
+            {{ message }}
+          </div>
+          {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+               
+                <div class="mb-1">
+                    <label for="category" class="form-label text-dark py-2">Select Category</label>
+                    <select name="category" required class="form-control" id="">
+                        <option value="Category-1">Category-1</option>
+                        <option value="Category-2">Category-2</option>
+                        <option value="Category-3">Category-3</option>
+                        <option value="Category-4">Category-4</option>
+                        <option value="Category-5">Category-5</option>
+                         
+
+                    </select>
+                </div>
+                 
+                 
+                <div>
+                <button type="submit" class="btn btn-primary d-flex justify-content-center w-100">List Participants</button>
+
+                </div>
+            </form>
+
+            
+        </div>
+
+        <div class="col-md-12">
+            {% if participants %}
+            <h3>Participants for {{category}}</h3>
+            <table class="table table-primary table-hover">
+                <tr>
+                    <th>
+                        Sl No
+                    </th>
+                    <th>
+                       Participant Name
+                    </th>
+                    <th>
+                        Admission No
+                    </th>
+                    <th>
+                        Class
+                    </th>
+                    <th>
+                       Division
+                    </th>
+                    <th>Code Letter</th>
+                    <th></th>
+                </tr>
+                {% for participant in participants %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{participant.student_name | title}}</td>
+                    <td>{{participant.admission_no}}</td>
+                    <td>{{participant.student_cls}}</td>
+                    <td>{{participant.division | upper}}</td>
+                    <td>{{participant.code_letter}}</td>
+
+                    <td>
+                        <button id="generate-letter" onclick="getCodeLetter({{participant.id}}, '{{category}}')" class="btn btn-primary">Generate Letter</button>    
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </div>
+ 
+ 
+    <div class="modal fade" id="codeLetterModal" tabindex="-1" aria-labelledby="codeLetterModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="codeLetterModalLabel">Job Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                   
+                    <div id="spinner" class="spinner-border text-primary" role="status">
+                        <span class="sr-only"></span>
+
+                        
+                      </div>
+                    
+                      <h1 id="letter-display" class="mt-3" style="display: none;"></h1>
+                </div>
+                <div class="modal-footer">
+                    <a id="downloadImageLink" href="" download class="btn btn-secondary"><i class=" fa fa-solid fa-download"></i></a>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="height: 34px;">X</button>
+                  <input type="text" name="" id="category" value="">
+                </div>
+            </div>
+        </div>
+        {% csrf_token %}
+    </div>
+
+
+    <script>
+        setTimeout(function() {
+           var errorMsg = document.getElementById('error-msg');
+           if (errorMsg) {
+              errorMsg.style.display = 'none';
+           }
+        }, 2000); // 5000 milliseconds = 5 seconds
+     </script>
+</div>
+
+<script>
+
+    function getCodeLetter(participantId, category){
+        console.log(category, participantId)
+        $("#codeLetterModal").modal("show");
+
+  // Show spinner and hide the letter initially
+  document.getElementById("spinner").style.display = "block";
+  document.getElementById("letter-display").style.display = "none";
+  const url = "{% url 'alif_admin:get_code' %}";
+  // Simulate a backend call
+  setTimeout(function () {
+    $.ajax({
+      url: url,  // Django URL template tag
+      type: "POST",
+      data: {
+        'participantId': participantId,
+        'category': category,
+    
+    },
+     // or "POST", based on your Django view
+      success: function (data) {
+        // Hide spinner and display the letter after the AJAX request is successful
+        document.getElementById("spinner").style.display = "none";
+        document.getElementById("letter-display").style.display = "block";
+        document.getElementById("letter-display").textContent = data.letter; // assuming 'letter' is returned in the data
+      },
+      error: function (xhr, status, error) {
+        // Handle errors (e.g., if the AJAX call fails)
+        console.error("Error fetching letter:", error);
+        alert("Something went wrong!");
+        $("#letterModal").modal("hide");
+      }
+    });
+  }, 5000);  
+    }
+     
+  // Show the modal
+  // Set the delay before making the AJAX call
+ 
+</script>
+
+ 
+
+{% endblock %}

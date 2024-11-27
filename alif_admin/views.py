@@ -6,13 +6,15 @@ from django.db.models.functions import Round
 from django.db.models import Sum
 from . import utils
 from django.views.decorators.csrf import csrf_exempt
+from .decorator import auth_admin
 
 
+@auth_admin
 def dashboard(request):
     return render(request,'alif_admin/dashboard.html')
 
 
-
+@auth_admin
 def register_student(request):
     message = ''
     if request.method == 'POST':
@@ -42,7 +44,7 @@ def register_student(request):
     return render(request,'alif_admin/registerStudent.html', {'message': message})
 
 
-
+@auth_admin
 def generate_code_letter(request):
     if request.method == 'POST':
         category = request.POST['category']
@@ -65,7 +67,7 @@ def get_code(request):
         code = 'Code Letter Already Generated'
 
     return JsonResponse({'letter': code})
-
+@auth_admin
 def results(request):
     if request.method == 'POST':
         category = request.POST['category']
@@ -92,7 +94,7 @@ def logout(request):
     del request.session['admin_id']
     request.session.flush()
     return redirect('common:admin_login')
-
+@auth_admin
 def view_details(request,id):
     
     record = Score.objects.filter(student__id  = id).order_by('judge')

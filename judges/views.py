@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect
 from alif_admin.models import *
-
+from .decorator import auth_judge
 # Create your views here.
 
+@auth_judge
 def dashboard(request):
     if request.method == 'POST':
         category = request.POST['category']

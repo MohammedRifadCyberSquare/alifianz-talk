@@ -68,7 +68,7 @@
                     </th>
                     <th>Code Letter</th>
                     <th></th>
-                    <th></th>
+                     
                 </tr>
                 {% for participant in participants %}
                 <tr>
@@ -80,11 +80,9 @@
                     <td id="sp-{{participant.id}}">{{participant.code_letter}}</td>
 
                     <td>
-                        <button id="generate-letter" onclick="getCodeLetter({{participant.id}}, '{{category}}')" class="btn btn-primary">Generate Letter</button>    
+                        <button id="generate-letter" onclick="getCodeLetter({{participant.id}}, '{{category}}')" class="btn btn-primary">Generate Code Letter</button>    
                     </td>
-                    <td>
-                        <a class="btn btn-danger" >Remove Student</a>
-                    </td>
+                   
 
                 </tr>
                 {% endfor %}
@@ -252,9 +250,20 @@
         document.getElementById("letter-display").style.display = "block";
         document.getElementById("letter-display").style.color = "red";
         var selected_span = 'sp-'+participantId
-        document.getElementById(selected_span).textContent = data.letter;
+        if(data.letter!= "Code Letter Already Generated"){
+            document.getElementById(selected_span).textContent = data.letter;
 
-        document.getElementById("letter-display").textContent = "Your Code letter is " + data.letter; // assuming 'letter' is returned in the data
+        }
+        
+
+        if(data.letter!= "Code Letter Already Generated"){
+            document.getElementById("letter-display").textContent = "Your Code letter is " + data.letter; // assuming 'letter' is returned in the data
+
+        }
+        else{
+            document.getElementById("letter-display").textContent =  "Code Letter Already Generated" // assuming 'letter' is returned in the data
+
+        }
       },
       error: function (xhr, status, error) {
         // Handle errors (e.g., if the AJAX call fails)

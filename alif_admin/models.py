@@ -35,7 +35,7 @@ class Score(models.Model):
     rubrics7 = models.FloatField()
     comments = models.CharField(max_length=200)
     judge = models.ForeignKey(Judge, on_delete = models.SET_NULL, null = True)
-    total = models.FloatField(default = 0.0)
+    total = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
 
     class Meta:
         db_table = "score"

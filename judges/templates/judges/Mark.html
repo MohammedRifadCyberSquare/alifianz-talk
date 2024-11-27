@@ -1,3 +1,4 @@
+
 {% extends 'judges/judgesMaster.html' %}
 
 {% block admin_content %}
@@ -30,43 +31,45 @@
             {{ message }}
           </div>
           {% endif %}
-            <form method="POST">
+            <form method="POST" onsubmit=" return validateForm()">
                 {% csrf_token %}
+                 
                 <div class="mb-1">
                     <label for="content" class="form-label text-dark py-2">Content/Matter (25)</label>
-                    <input type="number"class="form-control" min = "0" max="25" name="content" id="">
+                    <input type="text" pattern="^\d+(\.\d+)?$" title="Only numbers are allowed."   class="form-control"  min = "0" max="25" name="content" id="txtContent">
                 </div>
                 <div class="mb-1">
                     <label for="presentation_skills" class="form-label text-dark py-2">Presentation Skills (25)</label>
-                    <input type="number" required class="form-control" min = "0" max="25" name="presentation_skills" id="">
+                    <input type="text" pattern="^\d+(\.\d+)?$" title="Only numbers are allowed."  class="form-control"  name="presentation_skills" id="txtPresent">
                 </div>
+            
                 <div class="mb-1">
                     <label for="confidence" class="form-label text-dark py-2">Confidence (20)</label>
-                    <input type="number" required class="form-control"  min = "0" max="20" name="confidence" id="">
+                    <input type="text"  pattern="^\d+(\.\d+)?$" title="Only numbers are allowed."    class="form-control"    name="confidence" id="txtConfident">
                 </div>
                 <div class="mb-1">
                     <label for="cohesion" class="form-label text-dark py-2">Cohesion & Coherence (10)</label>
-                    <input type="number" required class="form-control"  min = "0" max="10" name="cohesion" id="">
+                    <input type="text" pattern="^\d+(\.\d+)?$" title="Only numbers are allowed."  class="form-control"    name="cohesion" id="txtCohesion">
                 </div>
 
                 <div class="mb-1">
                     <label for="grammar" class="form-label text-dark py-2">Grammar (10)</label>
-                    <input type="number" required class="form-control"  min = "0" max="10" name="grammar" id="">
+                    <input type="text"  pattern="^\d+(\.\d+)?$" title="Only numbers are allowed." class="form-control"    name="grammar" id="txtGrammar">
                 </div>
 
                 <div class="mb-1">
                     <label for="pronounce" class="form-label text-dark py-2">Pronounciation (5)</label>
-                    <input type="number" required class="form-control"  min = "0" max="5" name="pronounce" id="">
+                    <input type="text" pattern="^\d+(\.\d+)?$" title="Only numbers are allowed."  class="form-control"   name="pronounce" id="txtPro">
                 </div>
 
                 <div class="mb-1">
                     <label for="voice" class="form-label text-dark py-2">Voice Modulation/Intonation (5)</label>
-                    <input type="number" required class="form-control"  min = "0" max="5" name="voice" id="">
+                    <input type="text"   class="form-control"    name="voice" id="txtVoice">
                 </div>
                  
                 <div class="mb-3">
                     <label for="comment" class="form-label text-dark py-2">Comment</label>
-               <textarea name="comment" class="form-control" id="" required>
+               <textarea name="comment" class="form-control" id="txtComment" >
 
                </textarea>
                 </div>
@@ -112,6 +115,73 @@
         {% csrf_token %}
     </div>
 
+
+    <script>
+        function validateForm(){
+
+            var txtContent = document.getElementById('txtContent')
+            var txtPresent = document.getElementById('txtPresent')
+            var txtConfident = document.getElementById('txtConfident')
+            var txtCohesion = document.getElementById('txtCohesion')
+            var txtGrammar = document.getElementById('txtGrammar')
+            var txtPro = document.getElementById('txtPro')
+            var txtVoice = document.getElementById('txtVoice')
+            var txtComment = document.getElementById('txtComment')
+
+
+            if(parseFloat(txtContent.value.trim())>25 || parseFloat(txtContent.value.trim())< 0){
+                alert('Invalid Score')
+                txtContent.focus()
+                return false
+            }
+
+
+            if(parseFloat(txtPresent.value.trim())>25 || parseFloat(txtPresent.value.trim())<0){
+                alert('Invalid Score')
+                txtPresent.focus()
+                return false
+            }
+
+
+            if(parseFloat(txtConfident.value.trim())>20 || parseFloat(txtConfident.value.trim())< 0){
+                alert('Invalid Score')
+                txtConfident.focus()
+                return false
+            }
+
+            if(parseFloat(txtCohesion.value.trim())>10 || parseFloat(txtCohesion.value.trim())<0){
+                alert('Invalid Score')
+                txtCohesion.focus()
+                return false
+            }
+
+            if(parseFloat(txtGrammar.value.trim())>10 || parseFloat(txtGrammar.value.trim())< 0){
+                alert('Invalid Score')
+                txtGrammar.focus()
+                return false
+            }
+
+            if(parseFloat(txtPro.value.trim())>10 || parseFloat(txtPro.value.trim())<0){
+                alert('Invalid Score')
+                txtPro.focus()
+                return false
+            }
+
+
+            if(parseFloat(txtVoice.value.trim())>10 || parseFloat(txtVoice.value.trim())< 0){
+                alert('Invalid Score')
+                txtVoice.focus()
+                return false
+            }
+
+            
+            if(txtContent.value == "" || txtPresent.value == "" || txtConfident.value == "" ||  txtCohesion.value == "" || txtGrammar.value == "" || txtPro.value== "" || txtVoice.value == "" || txtComment.value.trim()== ""){
+                alert('Please Fill All Fields')
+                return false
+            }
+
+        }
+    </script>
 
     <script>
         setTimeout(function() {

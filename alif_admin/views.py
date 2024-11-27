@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .models import *
 from django.http import HttpResponse,JsonResponse
 import random
+from django.db.models.functions import Round
 from django.db.models import Sum
 from . import utils
 from django.views.decorators.csrf import csrf_exempt
@@ -77,7 +78,7 @@ def results(request):
                   'student__division',
                    'student__code_letter'
                 )
-        .annotate(total_marks=Sum('total'))
+        .annotate(total_marks=Round(Sum('total'),2))
         .order_by('-total_marks')
     #    rder by student name
     )

@@ -38,6 +38,7 @@
                     <th>Grammar</th>
                     <th>Pronunciation</th>
                     <th> Voice Modulation/Intonation</th>
+                    <th> Total</th>
                     <th>Comments</th>
                 </tr>
                 {% for item in record %}
@@ -51,6 +52,8 @@
                     <td>{{item.rubrics5}}</td>
                     <td>{{item.rubrics6}}</td>
                     <td>{{item.rubrics7}}</td>
+                    <td>{{item.total}}</td>
+
                     <td  style="word-wrap: break-word; word-break: break-word;">{{item.comments}}</td>
 
 

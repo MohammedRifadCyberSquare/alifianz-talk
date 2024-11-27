@@ -4,7 +4,12 @@ from alif_admin.models import *
 # Create your views here.
 
 def dashboard(request):
-    return render(request,'judges/dashboard.html')
+    if request.method == 'POST':
+        category = request.POST['category']
+        records = Score.objects.filter(judge = request.session['judge_id'], student__category = category)
+
+        return render(request,'judges/MyMarks.html',{'records': records,'category':category})
+    return render(request,'judges/MyMarks.html')
 
 
 def participant_list(request):
@@ -32,7 +37,7 @@ def mark(request,id):
         grammar = request.POST['grammar']
         pronounce = request.POST['pronounce']
         voice = request.POST['voice']
-        comment = request.POST['comment']
+        comment = request.POST['comment'].strip()
         total = float(content) + \
                 float(presentation_skills) + \
                 float(confidence) + \
@@ -70,7 +75,7 @@ def mark(request,id):
             participant_record[0].rubrics4 = cohesion
             participant_record[0].rubrics5 = grammar
             participant_record[0].rubrics6 = pronounce
-            participant_record[0].rubrics6 = voice
+            participant_record[0].rubrics7 = voice
             participant_record[0].comments = comment
             participant_record[0].total = total
 
@@ -91,3 +96,9 @@ def logout(request):
     del request.session['judge_name']
     request.session.flush()
     return redirect('common:admin_login')
+
+def my_marks(request):
+    print(request.session['judge_id'],'8888888888')
+   
+
+    return render(request,'judges/MyMarks.html')

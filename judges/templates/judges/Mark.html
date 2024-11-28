@@ -11,10 +11,10 @@
                 <tr>
                     <td>
                        <h4 class="py-3">
-                        Selected Category: <span class="text-danger font-bold" style="font-weight: bold;"> {{selected_category}}</span>
+                        Selected Category: <span class="fw-bold text-danger fs-4" style="font-weight: bold;"> {{selected_category}}</span>
                        </h4> 
                        <h4>
-                        Code Letter: <span class="text-danger font-bold" style="font-weight: bold;"> {{code_letter}}</span>
+                        Code Letter: <span class="fw-bold text-danger fs-4" style="font-weight: bold;"> {{code_letter}}</span>
                        </h4> 
                     </td>
                 </tr>
@@ -161,14 +161,14 @@
                 return false
             }
 
-            if(parseFloat(txtPro.value.trim())>10 || parseFloat(txtPro.value.trim())<0){
+            if(parseFloat(txtPro.value.trim())>5 || parseFloat(txtPro.value.trim())<0){
                 alert('Invalid Score')
                 txtPro.focus()
                 return false
             }
 
 
-            if(parseFloat(txtVoice.value.trim())>10 || parseFloat(txtVoice.value.trim())< 0){
+            if(parseFloat(txtVoice.value.trim())>5 || parseFloat(txtVoice.value.trim())< 0){
                 alert('Invalid Score')
                 txtVoice.focus()
                 return false

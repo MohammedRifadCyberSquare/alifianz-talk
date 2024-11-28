@@ -20,7 +20,7 @@
                
                 <div class="mb-1">
                     <label for="category" class="form-label text-dark py-2">Select Category</label>
-                    <select name="category" required class="form-control" id="">
+                    <select name="category" required class="form-control mb-3" id="">
                         <option value="Category-1">Category-1</option>
                         <option value="Category-2">Category-2</option>
                         <option value="Category-3">Category-3</option>
@@ -45,7 +45,7 @@
         <div class="col-md-12">
             
             {% if participants %}
-            <h3>Participants for {{category}}</h3>
+            <h3 class="py-3">Participants for <span class="text-danger fw-bold"> {{category}}</span></h3>
             <div class="table-responsive">
 
             
@@ -71,13 +71,13 @@
                      
                 </tr>
                 {% for participant in participants %}
-                <tr>
+                <tr align="center">
                     <td>{{forloop.counter}}</td>
                     <td>{{participant.student_name | title}}</td>
-                    <td>{{participant.admission_no}}</td>
-                    <td>{{participant.student_cls}}</td>
+                    <td>{{participant.admission_no  | upper}}</td>
+                    <td>{{participant.student_cls  | upper}}</td>
                     <td>{{participant.division | upper}}</td>
-                    <td id="sp-{{participant.id}}">{{participant.code_letter}}</td>
+                    <td id="sp-{{participant.id}}" class="fw-bold text-danger fs-4"><span class="">{{participant.code_letter}}</span> </td>
 
                     <td>
                         <button id="generate-letter" onclick="getCodeLetter({{participant.id}}, '{{category}}')" class="btn btn-primary">Generate Code Letter</button>    
@@ -93,94 +93,7 @@
     </div>
 
 </div>
-<!-- <div class="container d-flex justify-content-center w-full  " style="min-height: 100vh;">
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card-body">
-                <h3 class="text-center py-3" style="font-weight: bolder;">Generate Code Letter</h3>
-             
-                {% if message %}
-               <div class="alert  mt-3"  style="background-color: #EE4266;color: white;" id="error-msg" role="alert">
-                {{ message }}
-              </div>
-              {% endif %}
-
-              <form method="POST">
-                {% csrf_token %}
-               
-                <div class="mb-1">
-                    <label for="category" class="form-label text-dark py-2">Select Category</label>
-                    <select name="category" required class="form-control" id="">
-                        <option value="Category-1">Category-1</option>
-                        <option value="Category-2">Category-2</option>
-                        <option value="Category-3">Category-3</option>
-                        <option value="Category-4">Category-4</option>
-                        <option value="Category-5">Category-5</option>
-                         
-
-                    </select>
-                </div>
-                 
-                 
-                <div>
-                <button type="submit" class="btn btn-info d-flex justify-content-center w-100">List Participants</button>
-
-                </div>
-            </form>
-                </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            {% if participants %}
-            <h3>Participants for {{category}}</h3>
-            <table class="table table-primary table-hover">
-                <tr>
-                    <th>
-                        Sl No
-                    </th>
-                    <th>
-                       Participant Name
-                    </th>
-                    <th>
-                        Admission No
-                    </th>
-                    <th>
-                        Class
-                    </th>
-                    <th>
-                       Division
-                    </th>
-                    <th>Code Letter</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                {% for participant in participants %}
-                <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>{{participant.student_name | title}}</td>
-                    <td>{{participant.admission_no}}</td>
-                    <td>{{participant.student_cls}}</td>
-                    <td>{{participant.division | upper}}</td>
-                    <td>{{participant.code_letter}}</td>
-
-                    <td>
-                        <button id="generate-letter" onclick="getCodeLetter({{participant.id}}, '{{category}}')" class="btn btn-primary">Generate Letter</button>    
-                    </td>
-                    <td>
-                        <a class="btn btn-danger" >Remove Student</a>
-                    </td>
-
-                </tr>
-                {% endfor %}
-            </table>
-            {% endif %}
-        </div>
-    </div>
-
-</div> -->
+ 
 <div class="modal fade" id="codeLetterModal" tabindex="-1" aria-labelledby="codeLetterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -272,7 +185,7 @@
         $("#letterModal").modal("hide");
       }
     });
-  }, 5000);  
+  }, 3000);  
     }
      
   // Show the modal

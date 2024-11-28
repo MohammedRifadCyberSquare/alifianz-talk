@@ -9,7 +9,7 @@
         <div class="col-md-6 ">
             <div class="card-body">
                 <h3 class="text-center py-3" style="font-weight: bolder">
-                   Score Provided By Mr.{{request.session.judge_name|title}}
+                   Score Provided By <span class="fw-bold text-danger">Mr.{{request.session.judge_name|title}}</span>
                   </h3>
 
                   {% if message %}
@@ -29,7 +29,7 @@
           <label for="category" class="form-label text-dark py-2"
             >Select Category</label
           >
-          <select name="category" required class="form-control" id="">
+          <select name="category" required class="form-control py-3 my-3"  id="">
             <option value="Category-1">Category-1</option>
             <option value="Category-2">Category-2</option>
             <option value="Category-3">Category-3</option>
@@ -41,7 +41,7 @@
         <div>
           <button
             type="submit"
-            class="btn btn-success d-flex justify-content-center w-100"
+            class="btn btn-warning d-flex justify-content-center w-100"
           >
             View Participants
           </button>
@@ -84,7 +84,7 @@
               {% for item in records %}
               <tr align="center">
                 <td>{{forloop.counter}}</td>
-                <td>{{item.student.code_letter}}</td>
+                <td class="fw-bold text-danger fs-4 ">{{item.student.code_letter}}</td>
                 <td>{{item.rubrics1}}</td>
                 <td>{{item.rubrics2}}</td>
                 <td>{{item.rubrics3}}</td>

@@ -5,7 +5,7 @@
 
 <div class="container  w-full  " style="min-height: 100vh;">
     <div class="row d-flex justify-content-center align-items-center ">
-        <h3 class="text-center py-3" style="font-weight: bolder;"> Result for {{student|title}} - {{admission_no}}</h3>
+        <h3 class="text-center py-3" style="font-weight: bolder;"> Result for  {{student|title}} - {{admission_no}}</h3>
 
         
 
@@ -42,7 +42,7 @@
                     <th>Comments</th>
                 </tr>
                 {% for item in record %}
-                <tr>
+                <tr align="center">
                     <td>{{forloop.counter}}</td>
                     <td>{{item.judge.judge_name | title}}</td>
                     <td>{{item.rubrics1}}</td>
@@ -52,7 +52,7 @@
                     <td>{{item.rubrics5}}</td>
                     <td>{{item.rubrics6}}</td>
                     <td>{{item.rubrics7}}</td>
-                    <td>{{item.total}}</td>
+                    <td class="fw-bold">{{item.total}}</td>
 
                     <td  style="word-wrap: break-word; word-break: break-word;">{{item.comments}}</td>
 

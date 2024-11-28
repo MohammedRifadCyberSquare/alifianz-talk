@@ -12,7 +12,7 @@ class AlifAdmin(models.Model):
 
 class Participant(models.Model):
     student_name = models.CharField(max_length = 50)
-    admission_no = models.IntegerField()
+    admission_no = models.CharField(max_length = 20)
     student_cls = models.CharField(max_length = 20)
     division = models.CharField(max_length = 30)
     category = models.CharField(max_length = 30, default = "Category-1")

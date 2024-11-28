@@ -1,0 +1,41 @@
+<div class="row ">
+    <div class="col-md-12">
+         
+        <h3 class="d-flex justify-content-center" style="margin-top: 40px; margin-bottom: 30px;">Result for <span class="text-danger font-weight-bold px-2">{{category}}</span> </h3>
+        <div class="table-responsive">
+
+        <table class="table table-primary table-hover">
+          <tr align="center">
+            <th>Sl No</th>
+            <th>Participant Name</th>
+            <th>Admission No</th>
+            <th>Class</th>
+            <th>Division</th>
+            <th>Code Letter</th>
+  
+             
+            <th>Total</th>
+            <th></th>
+          </tr>
+          {% for participant in participants %}
+          <tr align="center">
+            <th>{{forloop.counter}}</th>
+            <th>{{participant.student__student_name | title}}</th>
+            <th>{{participant.student__admission_no| upper}}</th>
+            <th>{{participant.student__student_cls| upper}}</th>
+            <th>{{participant.student__division | upper}}</th>
+            <th class="fw-bold text-danger fs-4">{{participant.student__code_letter}}</th>
+            <th class="fw-bold ">{{participant.total_marks |floatformat:2}}</th>
+  
+  
+             
+            </th>
+          </tr>
+          {% endfor %}
+        </table>
+
+        </div>
+
+    </div>
+
+</div>

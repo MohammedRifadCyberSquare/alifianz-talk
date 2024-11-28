@@ -2,9 +2,11 @@ from django.shortcuts import render,redirect
 from .models import *
 from django.http import HttpResponse,JsonResponse
 import random
+
 from django.db.models.functions import Round
 from django.db.models import Sum
 from . import utils
+
 from django.views.decorators.csrf import csrf_exempt
 from .decorator import auth_admin
 
@@ -70,6 +72,8 @@ def get_code(request):
 @auth_admin
 def results(request):
     if request.method == 'POST':
+
+        
         category = request.POST['category']
         # participants = Score.objects.filter(student__category = category).annotate(total_marks=Sum('total')).order_by('student__category', 'student__student_name')
         student_scores = (
@@ -82,9 +86,13 @@ def results(request):
                 )
         .annotate(total_marks=Round(Sum('total'),2))
         .order_by('-total_marks')
-    #    rder by student name
     )
-        # return render(request,'alif_admin/generateCodeLetter.html', {'participants':participants,'category':category})
+        if 'download' in request.POST:
+            print('downloading........')
+            pdf = utils.render_to_pdf('alif_admin/result_download.html', {'participants':student_scores,'category':category})
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="result.pdf"'
+            return response
 
         return render(request,'alif_admin/results.html',{'participants':student_scores,'category':category})
     return render(request,'alif_admin/results.html')

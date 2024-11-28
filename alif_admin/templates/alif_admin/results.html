@@ -59,7 +59,7 @@
             <div class="table-responsive">
 
             <table class="table table-primary table-hover">
-              <tr>
+              <tr align="center">
                 <th>Sl No</th>
                 <th>Participant Name</th>
                 <th>Admission No</th>
@@ -75,11 +75,11 @@
               <tr align="center">
                 <td>{{forloop.counter}}</td>
                 <td>{{participant.student__student_name | title}}</td>
-                <td>{{participant.student__admission_no}}</td>
-                <td>{{participant.student__student_cls}}</td>
+                <td>{{participant.student__admission_no| upper}}</td>
+                <td>{{participant.student__student_cls| upper}}</td>
                 <td>{{participant.student__division | upper}}</td>
-                <td>{{participant.student__code_letter}}</td>
-                <td>{{participant.total_marks |floatformat:2}}</td>
+                <td class="fw-bold text-danger fs-4">{{participant.student__code_letter}}</td>
+                <td class="fw-bold ">{{participant.total_marks |floatformat:2}}</td>
       
       
                 <td>
@@ -93,7 +93,16 @@
               </tr>
               {% endfor %}
             </table>
+
             </div>
+
+            <form method ="POST">
+              {% csrf_token %}
+            <div class="my-2">
+              <input type="hidden" value="{{category}}" name="category" id="">
+              <input type="submit" name="download" value="Download Pdf" class="btn btn-danger"   id="">
+            </div>
+          </form>
             {% endif %}
             </div>
             </div>

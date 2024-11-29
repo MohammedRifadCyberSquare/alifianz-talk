@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from alif_admin.models import Participant
 from datetime import datetime
+from django.utils.timezone import localtime,now
 from .decorator import auth_user
 
 @auth_user
@@ -17,7 +18,8 @@ def participants_list(request):
             print(request.POST['student_id'])
             selected_participant = Participant.objects.get(id = request.POST['student_id'])
             selected_participant.report_status = 'reported'
-            current_time = datetime.now().strftime('%I:%M %p')
+
+            current_time = localtime(now()).strftime('%I:%M %p')
             print(current_time) 
             selected_participant.report_time = current_time
             selected_participant.save()

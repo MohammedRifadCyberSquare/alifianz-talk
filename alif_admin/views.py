@@ -89,9 +89,10 @@ def results(request):
     )
         if 'download' in request.POST:
             print('downloading........')
+            file_name = category + '-results'
             pdf = utils.render_to_pdf('alif_admin/result_download.html', {'participants':student_scores,'category':category})
             response = HttpResponse(pdf, content_type='application/pdf')
-            response['Content-Disposition'] = 'attachment; filename="result.pdf"'
+            response['Content-Disposition'] = 'attachment; filename=' + file_name +'.pdf'
             return response
 
         return render(request,'alif_admin/results.html',{'participants':student_scores,'category':category})

@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Alifianz Talk</title>
     <!-- plugins:css -->
+
+    
     <link rel="stylesheet" href="{% static 'scl_admin/assets/vendors/feather/feather.css' %}">
     <link rel="stylesheet" href="{% static 'scl_admin/assets/vendors/ti-icons/css/themify-icons.css' %}">
     <link rel="stylesheet" href="{% static 'scl_admin/assets/vendors/css/vendor.bundle.base.css' %}">
     <link rel="stylesheet" href="{% static 'scl_admin/assets/vendors/font-awesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'scl_admin/assets/vendors/mdi/css/materialdesignicons.min.css' %}">
     <!-- endinject -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <!-- Plugin css for this page -->
     <!-- <link rel="stylesheet" href="assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css"> -->
     <link rel="stylesheet" href="{% static 'scl_admin/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.css' %}">
@@ -40,10 +44,10 @@
         <div class="input-group">
           <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
             <span class="input-group-text" id="search">
-             
+              <i class="icon-search"></i>
             </span>
           </div>
-        
+          <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
         </div>
       </li>
     </ul>
@@ -52,26 +56,11 @@
        
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-          <span class="fw-bold">
-         Welcome,  {{request.session.judge_name}}
-
-          </span>
-          {% if request.session.judge_name == 'Ruzlan Ameen' %}
-          <img src="/media/judge1.jpeg" alt="profile" />
-          {% endif %}
-
-          {% if request.session.judge_name == 'Ambrin Mohammed Tahir' %}
-          <img src="/media/judge2.jpeg" alt="profile" />
-          {% endif %}
-
-          {% if request.session.judge_name == 'Abdul Rasheed KV' %}
-          <img src="/media/judge3.jpeg" alt="profile" />
-          {% endif %}
-          
+          <img src="{% static 'admin.png' %}" alt="profile" />
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
            
-          <a class="dropdown-item">
+          <a class="dropdown-item" href="{% url 'alif_user:logout' %}">
             <i class="ti-power-off text-primary"></i> Logout </a>
         </div>
       </li>
@@ -92,23 +81,26 @@
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'judges:dashboard' %}">
+      <a class="nav-link" href="{% url 'alif_user:dashboard' %}">
         <i class="icon-grid menu-icon"></i>
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link"   href="{% url 'judges:participant_list' %}"  >
+      <a class="nav-link"   href="{% url 'alif_user:participants_list' %}"  >
         <i class="icon-layout menu-icon"></i>
         <span class="menu-title">Participants List</span>
         <i class="menu-arrow"></i>
       </a>
        
     </li>
+
+    
+      
      
      
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'judges:logout' %}">
+      <a class="nav-link" href="{% url 'alif_user:logout' %}">
         <i class="icon-paper menu-icon"></i>
         <span class="menu-title">Logout </span>
       </a>

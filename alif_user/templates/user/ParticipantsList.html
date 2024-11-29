@@ -1,4 +1,4 @@
-{% extends 'alif_admin/adminMaster.html' %}
+{% extends 'user/UserMaster.html' %}
 
 {% block admin_content %}
 
@@ -50,7 +50,7 @@
 
             
             <table class="table table-primary table-hover">
-                <tr>
+                <tr align="center">
                     <th>
                         Sl No
                     </th>
@@ -66,37 +66,42 @@
                     <th>
                        Division
                     </th>
-                    <th>Code Letter</th>
                     <th>Report Status</th>
-                    <th>Report Time</th>
+                    <th>Reported Time</th>
 
                     <th></th>
+                    <th></th>
+                    <th></th>
+
                      
                 </tr>
                 {% for participant in participants %}
+                <form method="POST">
+                    {% csrf_token %}
                 <tr align="center">
+                   
                     <td>{{forloop.counter}}</td>
                     <td>{{participant.student_name | title}}</td>
                     <td>{{participant.admission_no  | upper}}</td>
                     <td>{{participant.student_cls  | upper}}</td>
                     <td>{{participant.division | upper}}</td>
-                    <td id="sp-{{participant.id}}" class="fw-bold text-danger fs-4"><span class="">{{participant.code_letter}}</span> </td>
-
                     {% if participant.report_status == 'not reported' %}
-                    <td class="text-danger fw-bold">{{participant.report_status | title}}</td>
+                     <td class="text-danger fw-bold">{{participant.report_status | title}}</td>
 
-                    {% else %}
-                    <td class="text-success fw-bold">{{participant.report_status | title}}</td>
+                     {% else %}
+                     <td class="text-success fw-bold">{{participant.report_status | title}}</td>
 
-                    {% endif %}
+                     {% endif %}
                      <td class="text-dark fw-bold">{{participant.report_time | upper}}</td>
-                      
+
                     <td>
-                        <button id="generate-letter" onclick="getCodeLetter({{participant.id}}, '{{category}}')" class="btn btn-primary">Generate Code Letter</button>    
+                        <button id=""   class="btn btn-primary">Mark as Reported</button>    
                     </td>
-                   
+                    <td><input type="hidden" value="{{participant.id}}" name="student_id" id=""></td>
+                    <td><input type="hidden" name="category" value="{{category}}" id=""></td>
 
                 </tr>
+            </form>
                 {% endfor %}
             </table>
         </div>

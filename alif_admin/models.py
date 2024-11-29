@@ -9,6 +9,13 @@ class AlifAdmin(models.Model):
     class Meta:
         db_table = "alif_admin"
 
+class AlifUser(models.Model):
+    username = models.CharField(max_length = 30)
+    name = models.CharField(max_length = 30)
+    password = models.CharField(max_length = 30)
+
+    class Meta:
+        db_table = "alif_user"
 
 class Participant(models.Model):
     student_name = models.CharField(max_length = 50)
@@ -17,6 +24,8 @@ class Participant(models.Model):
     division = models.CharField(max_length = 30)
     category = models.CharField(max_length = 30, default = "Category-1")
     status = models.CharField(max_length = 100, default = 'active')
+    report_status = models.CharField(max_length = 30, default = 'not reported')
+    report_time = models.CharField(default = "", max_length=30)
     added_date = models.DateTimeField(auto_now_add=True)
     code_letter = models.CharField(max_length = 20, default ="" )
     

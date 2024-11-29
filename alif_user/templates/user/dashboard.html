@@ -1,0 +1,17 @@
+{% extends "user/UserMaster.html" %}
+{% block admin_content %}
+<div class="row">
+    <div class="col-md-12 h-full" style="padding:100px">
+       
+        <div class="d-flex justify-content-center">
+            <h2>Welcome {{request.session.user_name | title}}</h2>
+        </div>
+   
+     
+  </div>
+   
+   
+  </div>
+
+
+{% endblock %}

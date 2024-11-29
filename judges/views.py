@@ -12,19 +12,20 @@ def dashboard(request):
         return render(request,'judges/MyMarks.html',{'records': records,'category':category})
     return render(request,'judges/MyMarks.html')
 
-
+@auth_judge
 def participant_list(request):
     no_data = False
     if request.method == 'POST':
         category = request.POST['category']
 
-        participants = Participant.objects.filter(category = category)
+        participants = Participant.objects.filter(category = category).order_by('code_letter')
         if not participants:
             no_data = True
         return render(request,'judges/ParticipantsList.html', {'participants':participants,'category':category,'no_data': no_data})
 
     return render(request,'judges/ParticipantsList.html')
 
+@auth_judge
 def mark(request,id):
     selected_participant = Participant.objects.get(id = id)
     selected_category = selected_participant.category
@@ -95,11 +96,17 @@ def mark(request,id):
 def logout(request):
     del request.session['judge_id']
     del request.session['judge_name']
+
+
     request.session.flush()
     return redirect('common:admin_login')
 
+@auth_judge
 def my_marks(request):
     print(request.session['judge_id'],'8888888888')
+    print(request.session['judge_name'],'8888888888')
+
+
    
 
     return render(request,'judges/MyMarks.html')

@@ -89,7 +89,7 @@
                     <td class="text-success fw-bold">{{participant.report_status | title}}</td>
 
                     {% endif %}
-                     <td class="text-dark fw-bold">{{participant.report_time | upper}}</td>
+                     <td class="  fw-bold text-info ">{{participant.report_time | upper}}</td>
                       
                     <td>
                         <button id="generate-letter" onclick="getCodeLetter({{participant.id}}, '{{category}}')" class="btn btn-primary">Generate Code Letter</button>    
